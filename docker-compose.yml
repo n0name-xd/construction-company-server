@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: companies-bd
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: ${BD_USERNAME}
+      POSTGRES_PASSWORD: ${BD_PASSWORD}
+      POSTGRES_DB: ${BD_NAME}
+    ports:
+      - '${BD_PORT}:${BD_PORT}'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

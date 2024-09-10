@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserModel } from './models';
 import { CreateUserDto } from './dto/user.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('user')
 export class UserController {
@@ -19,6 +28,7 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
+  @UseGuards(JwtGuard)
   @Get(':id')
   async getUserById(
     @Param('id') userId: number,
